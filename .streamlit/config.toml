@@ -4,7 +4,7 @@ backgroundColor = "#FFFFFF"
 secondaryBackgroundColor = "#F0F0F5"
 textColor = "#000000"
 accentColor = "#5EC6F5"
-font = "sans-serif"
+font = "sans serif"
 
 [theme.light]
 primaryColor = "#5EC6F5"
@@ -12,7 +12,7 @@ backgroundColor = "#FFFFFF"
 secondaryBackgroundColor = "#F0F0F5"
 textColor = "#000000"
 accentColor = "#5EC6F5"
-font = "sans-serif"
+font = "sans serif"
 
 [theme.dark]
 primaryColor = "#5EC6F5"
@@ -20,4 +20,4 @@ backgroundColor = "#1E1E1E"
 secondaryBackgroundColor = "#2C2C2C"
 textColor = "#FFFFFF"
 accentColor = "#5EC6F5"
-font = "sans-serif"
+font = "sans serif"
