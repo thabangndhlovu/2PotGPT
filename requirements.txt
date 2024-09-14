@@ -1,5 +1,5 @@
 chromadb
-pysqlite3
+pysqlite3-binary
 langchain
 langchain_chroma
 langchain_community
