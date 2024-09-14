@@ -1,5 +1,3 @@
-streamlit
-sqlite3
 chromadb
 langchain
 langchain_chroma
