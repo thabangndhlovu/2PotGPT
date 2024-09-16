@@ -1,3 +1,4 @@
+streamlit
 pysqlite3-binary
 langchain
 langchain_chroma

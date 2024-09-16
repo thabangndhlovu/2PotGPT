@@ -1,7 +1,10 @@
 def main():
-    __import__("pysqlite3")
-    import sys
-    sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+    try:
+        __import__("pysqlite3")
+        import sys
+        sys.modules["sqlite3"] = sys.modules.pop("pysqlite3")
+    except:
+        pass
 
     import re
     import time
@@ -27,7 +30,7 @@ def main():
         page_title="2PotGPT", page_icon=".streamlit/icon.jpg", layout="centered"
     )
     st.markdown(
-        """<h1 style="text-align: center; font-size: 50px;"><strong>2Pots<span style='color: #5EC6F5;'>GPT</span></strong></h2>""",
+        """<h1 style="text-align: center; font-size: 50px;"><strong>2Pot<span style='color: #5EC6F5;'>GPT</span></strong></h2>""",
         unsafe_allow_html=True,
     )
 

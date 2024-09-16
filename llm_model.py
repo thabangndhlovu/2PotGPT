@@ -10,15 +10,19 @@ from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import TextSplitter, RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 
+CURRENT_DATE = datetime.now().strftime("%d %B %Y")
 os.environ["GOOGLE_API_KEY"] = st.secrets["API_KEY"]
-LLM_MODEL = "models/gemini-1.5-flash-exp-0827"  # "gemini-1.5-flash-8b-exp-0827"
-EMBEDDINGS_MODEL = "models/text-embedding-004"
-MODEL_TEMPERATURE = 0
 
 DOCS = "Documents/FAQ.txt"
 PERSIST_DIRECTORY = "Documents/embedding_db"
-CURRENT_DATE = datetime.now().strftime("%d %B %Y")
-
+EMBEDDINGS_MODEL = "models/text-embedding-004"
+MODEL_CONFIG = {
+  "model": "models/gemini-1.5-flash-exp-0827",
+  "temperature": 0,
+  "top_p": 0.95,
+  "top_k": 64,
+  "max_output_tokens": 1000
+}
 
 class QASplitter(TextSplitter):
     def split_text(self, text):
@@ -27,7 +31,6 @@ class QASplitter(TextSplitter):
             for split in text.split("Q:")
             if split.strip()
         ]
-
 
 def load_and_split_document(file_path):
     loader = TextLoader(file_path)
@@ -70,7 +73,7 @@ and a "Retirement Pot" (two-thirds, preserved for retirement income), promoting 
 
 Highlight the required and important parts in a markdown.
 
-Use context as your knowledge base and if the user question is out of context ask for clarification.
+**Use Context, Chat History and Current Date as your knowledge base** and if the user question is out of context ask for clarification.
 
 <Current Date>
 {current_date}
@@ -88,17 +91,14 @@ Use context as your knowledge base and if the user question is out of context as
 {question}
 </User Question>
 
-**Helpful answer: **
+**Concise Helpful Answer: **
 """.replace("{current_date}", CURRENT_DATE)
 
 prompt_template = PromptTemplate.from_template(template)
 
 
 def initialize_conversation_chain():
-    llm = ChatGoogleGenerativeAI(
-        model=LLM_MODEL,
-        temperature=MODEL_TEMPERATURE,
-    )
+    llm = ChatGoogleGenerativeAI(**MODEL_CONFIG)
 
     memory = ConversationBufferMemory(
         memory_key="chat_history",
