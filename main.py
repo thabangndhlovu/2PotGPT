@@ -74,17 +74,15 @@ def main():
             # Simulate streaming
             for chunk in chunks:
                 full_response += chunk
-                time.sleep(0.035)  # Add a small delay between chunks
+                time.sleep(0.04)  # Add a small delay between chunks
 
                 # Clean up the displayed text
                 display_text = re.sub(r"\n+", "\n\n", full_response.strip())
                 message_placeholder.markdown(display_text + "▌")
 
-            # Display final clean version
-            final_text = re.sub(r"\n+", "\n\n", full_response.strip())
-            message_placeholder.markdown(final_text)
+            message_placeholder.markdown(response)
 
-        st.session_state.messages.append({"role": "assistant", "content": final_text})
+        st.session_state.messages.append({"role": "assistant", "content": response})
 
         st.button(
             "Reset Chat",

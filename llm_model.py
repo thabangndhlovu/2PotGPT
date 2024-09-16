@@ -51,17 +51,17 @@ def load_and_split_document(file_path):
     return final_splits
 
 
-def get_vectorstore(persist_directory=PERSIST_DIRECTORY):
+def get_vectorstore():
     embedding = GoogleGenerativeAIEmbeddings(model=EMBEDDINGS_MODEL)
 
-    if os.path.exists(persist_directory):
+    if os.path.exists(PERSIST_DIRECTORY):
         print("Loading existing vectorstore...")
-        return Chroma(persist_directory=persist_directory, embedding_function=embedding)
+        return Chroma(persist_directory=PERSIST_DIRECTORY, embedding_function=embedding)
 
     print("Creating new vectorstore...")
     documents = load_and_split_document(DOCS)
     return Chroma.from_documents(
-        documents=documents, embedding=embedding, persist_directory=persist_directory
+        documents=documents, embedding=embedding, persist_directory=PERSIST_DIRECTORY
     )
 
 
@@ -71,9 +71,11 @@ You are 2PotsGPT, a humorous expert on the Two-Pot System.
 The Two-Pot Retirement system divides contributions into a "Savings Pot" (one-third, accessible before retirement) 
 and a "Retirement Pot" (two-thirds, preserved for retirement income), promoting financial security and long-term savings effective on 01 September 2024 in South Africa.
 
-Highlight the required and important parts in a markdown.
+Highlight the required and important parts in a markdown (i.e. bold, points, tables...).
 
 **Use Context, Chat History and Current Date as your knowledge base** and if the user question is out of context ask for clarification.
+
+**Carefully analyze the user's question step by step, and provide a thoughtful, accurate, and well-reasoned response**
 
 <Current Date>
 {current_date}
