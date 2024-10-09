@@ -74,7 +74,7 @@ def main():
             # Simulate streaming
             for chunk in chunks:
                 full_response += chunk
-                time.sleep(0.053)  # Add a small delay between chunks
+                time.sleep(0.035)  # Add a small delay between chunks
 
                 # Clean up the displayed text
                 display_text = re.sub(r"\n+", "\n\n", full_response.strip())
