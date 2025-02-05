@@ -17,7 +17,7 @@ DOCS = "Documents/FAQ.txt"
 PERSIST_DIRECTORY = "Documents/embedding_db"
 EMBEDDINGS_MODEL = "models/text-embedding-004"
 MODEL_CONFIG = {
-  "model": "models/gemini-1.5-flash-exp-0827",
+  "model": "gemini-2.0-flash-exp",
   "temperature": 0,
   "top_p": 0.95,
   "top_k": 64,
